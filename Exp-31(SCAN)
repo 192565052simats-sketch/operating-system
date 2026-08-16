@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int req[50], n, head, total = 0, i, j, temp;
+
+    printf("Enter number of requests: ");
+    scanf("%d", &n);
+
+    printf("Enter request queue: ");
+    for(i = 0; i < n; i++)
+        scanf("%d", &req[i]);
+
+    printf("Enter initial head position: ");
+    scanf("%d", &head);
+
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = 0; j < n - i - 1; j++)
+        {
+            if(req[j] > req[j + 1])
+            {
+                temp = req[j];
+                req[j] = req[j + 1];
+                req[j + 1] = temp;
+            }
+        }
+    }
+
+    total += abs(head - req[0]);
+
+    for(i = 0; i < n - 1; i++)
+        total += abs(req[i] - req[i + 1]);
+
+    printf("Total Head Movement = %d\n", total);
+
+    return 0;
+}
